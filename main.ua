@@ -17,7 +17,7 @@ vw ← ×vh ÷ih iw
 pc ← 
 
 rv ← ↯∶[⍥⚂]/×.
-r ← ⍉[⍥(∶+×[÷iw vw ÷ih vh 0]-0.5rv△..)sam-cc pc]
+r ← ⍉[⍥(∶+×[÷iw vw ÷ih vh 0]-0.5rv△..)-1sam-cc pc]
 
 norm ← (
   ..∶→, ⍉ sp rad
@@ -31,8 +31,14 @@ norm ← (
 
   # This is not fast, but it works.
   →(∺×,)
-  ∶⍘⍉∵(?(⊡∶sp)'↯3),,=0×0.
-  ⍚[∞ ¯1]÷→-∵(?(⊡∶rad)·)→∶
+  →∶∶⍘⍉∵(?(⊡∶sp)'↯3),,=0×0.
+  ∵(?(⊡∶rad)·)
+  # Here is where albedo would be extracted.
+  ⍚[∞ ¯1]÷→-
+  # Here is where the next ray needs to be modified by random unit.
+  # Not sure how to collect if albedo is also here but not used yet.
+  # want to collect in 2 arrays I guess.
+  # Might need to pass empty ones in and just append to them.
 )
 
 norm r
