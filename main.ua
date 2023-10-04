@@ -22,9 +22,9 @@ r ← ⍉[⍥(∶+×[÷iw vw ÷ih vh 0]-0.5rv△..)-1sam-cc pc]
 ccr ← ↯△r0
 
 norm ← (
-  ..∶→, sp rad
-  ≡/+×.∶∺(/+×),∶∺-∶ccr∶→∶∶/+×
-  -∺×→(∶×.)→',∶→→.-×.∶→∶→→∶
+  ∶/+×..
+  →→∶∺(/+×),,∺-sp ccr
+  +∶×.,¯∺×→,-×.rad≡/+×.∶
   /↧⍘⍉∺'÷∶+¯∶∵⊟¯.√
 
   # is there a better way to set negative values to NaN?
