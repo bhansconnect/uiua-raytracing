@@ -22,8 +22,8 @@ r ← ⍉[⍥(∶+×[÷iw vw ÷ih vh 0]-0.5rv△..)-1sam-cc pc]
 ccr ← ↯△r0
 
 norm ← (
-  ∶/+×..
-  →→∶∺(/+×),,∺-sp ccr
+  ∶→∶∶/+×..∶∺-sp
+  →→∶∺(/+×),,
   +∶×.,¯∺×→,-×.rad≡/+×.∶
   /↧⍘⍉∺'÷∶+¯∶∵⊟¯.√
 
@@ -43,7 +43,7 @@ norm ← (
   # Might need to pass empty ones in and just append to them.
 )
 
-norm r
+norm ccr r
 
 ⍉×0.5+1
 ⍉+⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1⍚[∞ ¯1]÷√/+×..∶
