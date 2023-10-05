@@ -17,6 +17,13 @@ vw ← ×vh ÷ih iw
 ⍘⍉⊞(⊂∶¯1⊂∶)
 pc ← 
 
+# Just saving this for later, random in unit sphere
+tries ← 10 # technically should be ∞
+ru ← (
+  ⊙↯↯,1∶2
+  ;⍥(⎋=0/↥♭∶↯⊂3△..>1/+×..↯⊙⍜▽(-1×2[⍥⚂]⧻)⊙∩♭△.)tries
+)
+
 rv ← ↯∶[⍥⚂]/×.
 r ← ⍉[⍥(∶+×[÷iw vw ÷ih vh 0]-0.5rv△..)-1sam-cc pc]
 a ← ↯△ r1
@@ -24,7 +31,7 @@ a ← ↯△ r1
 ccr ← ⍘⍉↯↻1△r ⍉[cc]
 
 # TODO: find  better way to do this
-mashNaN ← ↯→(⍜▽;→∶∶▽,∶→∶¬=0×0.∷♭)△.
+mashNaN ← ↯⊙(⍜▽;⊙∶∶▽,∶⊙∶¬=0×0.∩♭)△.
 
 unit ← ⍚[∞ ¯1]÷√/+×..
 
@@ -32,28 +39,28 @@ norm ← (
   &pf "X"
   # Save forgetten thing to use later
   # This should really be saved in a different way
-  →→→∶→→∶→∶.
-  ∶→∶∶/+×..∶∺-sp
-  →→∶∺(/+×),,
-  +∶×.,¯∺×→,-×.rad≡/+×.∶
+  ⊙⊙⊙∶⊙⊙∶⊙∶.
+  ∶⊙∶∶/+×..∶∺-sp
+  ⊙⊙∶∺(/+×),,
+  +∶×.,¯∺×⊙,-×.rad≡/+×.∶
   /↧⍘⍉∺'÷∶+¯∶∵⊟¯.√
 
   # is there a better way to set negative values to NaN?
   ×+1√¯<0.
-  ×1+×0∶⍚[0 1]⊗→'⍉∶.→∶./↧.
+  ×1+×0∶⍚[0 1]⊗⊙'⍉∶.⊙∶./↧.
 
   # This is not fast, but it works.
-  →(.∺×∶)
-  →∶∶⍘⍉∵(?(⊡∶sp)'↯3),,=0×0.
-  ∵(?(⊡∶rad)·)
+  ⊙(.∺×∶)
+  ⊙∶∶⍘⍉∵(?(⊡∶sp)'↯3),,=0×0.
+  ∵(?(⊡∶rad)∘)
   # Here is where albedo could be extracted.
-  ⍚[∞ ¯1]÷→-
+  ⍚[∞ ¯1]÷⊙-
   # unit random perturbing...This is technically wrong.
   +unit rv△.
   # dir rt oldr olda ccr to (rt+ccr) dir mergedR mergedA
-  +→∶→→∶→→→∶∶
-  →(→'∶mashNaN.)
-  →(→∶∶×↧1+0.5¬=0×0,∶)
+  +⊙∶⊙⊙∶⊙⊙⊙∶∶
+  ⊙(⊙'∶mashNaN.)
+  ⊙(⊙∶∶×↧1+0.5¬=0×0,∶)
 )
 
 ;;⍥norm md ccr r r a
@@ -61,6 +68,6 @@ norm ← (
 &p ""
 
 ⍉+⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1unit
-√ ⍉÷→/+⧻.⍉⍉
-√×⍉÷→/+⧻.⍘⍉∶
+√ ⍉÷⊙/+⧻.⍉⍉
+√×⍉÷⊙/+⧻.⍘⍉∶
 &ims
