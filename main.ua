@@ -44,7 +44,7 @@ nan ← ÷0 0
 NegToNaN ← (⍜♭(⍜♭(⍜▽(×nan)∶)∶)<tm.)
 Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶∶√/+×..
 
-[⍥.-1sm]⊠(⊂∶0⊂∶)⇡ih⇡iw
+[⍥.-1sm]↯[¯1 3]⊠(⊂∶0⊂∶)⇡ih⇡iw
 +pz×pduv⍘⍉
 +×pduv-0.5Rv △.
 ⊙-.⍘⍉↯∶cc↻1△.
@@ -53,6 +53,7 @@ Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶
 # run sampling
 ⍥(
   &pf "█"
+  # TODO: Only keep and run the rest of the function on non nan rays
   # Hit each sphere at time or nan
   # orig cdir fdir color
   ∺'/+×,,⊙∶∺-c.
@@ -90,4 +91,5 @@ Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶
 
 ;;
 √÷∶/+∶⧻.⍉ ×Bgd
+↯ [ih iw 3]
 &ims
