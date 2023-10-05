@@ -8,9 +8,13 @@ tm ← 0.001
 fl ← 1
 cc ← [0 0 0]
 
-s ← [[0 0 ¯1] [0 ¯100.5 ¯1]]
+lam ← 0
+met ← 1
+
+c ← [[0 0 ¯1] [0 ¯100.5 ¯1]]
 r ← [0.5 100]
 m ← [[0.7 0.3 0.3] [0.8 0.8 0]]
+mt ← [lam lam]
 
 ih ← ↥1⌊÷ar iw
 vw ← ×vh ÷ih iw
@@ -27,7 +31,8 @@ pz ← +×0.5pduv ulc
 
 Rv ← ↯∶[⍥⚂]/×.
 
-NegToNaN ← (⍜♭(⍜♭(⍜▽(×÷0 0)∶)∶)<tm.)
+nan ← ÷0 0
+NegToNaN ← (⍜♭(⍜♭(⍜▽(×nan)∶)∶)<tm.)
 Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶∶√/+×..
 
 [⍥.-1sm]⊠(⊂∶0⊂∶)⇡ih⇡iw
@@ -40,19 +45,27 @@ Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶
 # Hit each sphere at time or nan
 
 # orig cdir fdir color
-∺'/+×,,⊙∶∺-s.
+∺'/+×,,⊙∶∺-c.
 # bhalf oc cdir orig fdir color
 ⊙(∺×⊙(./+×..)-×.r≡/+×.)
-# bhalf ac a cdir orig  fdir color
+# bhalf ac a cdir orig fdir color
 √-∶×.,∶
-# sqrtd bhalf a cdir orig  fdir color
+# sqrtd bhalf a cdir orig fdir color
 ∺'÷∶↧∩NegToNaN⊃+-⊙¯
-# minroot cdir orig  fdir color
+# minroots cdir orig fdir color
++×⧻c¬=0×0,⊙/↧⍚1'⊢⌂⍉. # Note: makes min NaN index overflow
+# minindex mint cdir orig fdir color
+⊙(.+∺×∶)
+# minindex pos pos fdir color
+# Is there a better way to load this stuff???
+⊙-∶⍘⍉⍚[0 ∞](|2 ⍣⊡([nan nan nan];;;)),c
+⊙(∺'÷∶∶)∶⍚[0 ∞](|2 ⍣⊡(nan;;;)),r
+# minindex normal pos fdir color
 
 # update color and scatter by material type
 
 # ;;
 # √÷∶/+∶⧻.⍉ ×B
-⍉/↧
+×0.5+1÷∶/+∶⧻.;~△.⍉∶
 &ims
 ;;;;
