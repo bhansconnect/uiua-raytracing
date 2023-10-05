@@ -1,73 +1,93 @@
 ar ← ÷9 16
-iw ← 100
-ih ← ⌊÷ar iw
+iw ← 50
+vh ← 2
 
 md ← 50
-sam ← 100
+sm ← 10
+tm ← 0.001
 
+fl ← 1
 cc ← [0 0 0]
-sp ← [[0 0 ¯1] [0 ¯100.5 ¯1]]
-rad ← [0.5 100]
 
-vh ← 2
+lam ← 0
+met ← 1
+
+c ← [[0 0 ¯1] [0 ¯100.5 ¯1]]
+r ← [0.5 100]
+mc ← [[0.7 0.3 0.3] [0.8 0.8 0]]
+mt ← [lam lam]
+
+ih ← ↥1⌊÷ar iw
 vw ← ×vh ÷ih iw
 
--÷2vw×÷∶vw∶⇡.iw
-+÷2vh×÷∶vh∶¯⇡.ih
-⍘⍉⊞(⊂∶¯1⊂∶)
-pc ← 
+vu ← [vw 0 0]
+vv ← [0 ¯vh 0]
 
-# Just saving this for later, random in unit sphere
-tries ← 10 # technically should be ∞
-ru ← (
+pdu ← ÷iw vu
+pdv ← ÷ih vv
+pduv ← +pdu pdv
+
+ulc ← -÷2vu -÷2vv -[0 0 fl] cc
+pz ← +×0.5pduv ulc
+
+Rv ← ↯∶[⍥⚂]/×.
+tries ← 1 # technically should be ∞
+Ru ← (
   ⊙↯↯,1∶2
   ;⍥(⎋=0/↥♭∶↯⊂3△..>1/+×..↯⊙⍜▽(-1×2[⍥⚂]⧻)⊙∩♭△.)tries
 )
 
-rv ← ↯∶[⍥⚂]/×.
-r ← ⍉[⍥(∶+×[÷iw vw ÷ih vh 0]-0.5rv△..)-1sam-cc pc]
-a ← ↯△ r1
-
-ccr ← ⍘⍉↯↻1△r ⍉[cc]
-
 # TODO: find  better way to do this
-mashNaN ← ↯⊙(⍜▽;⊙∶∶▽,∶⊙∶¬=0×0.∩♭)△.
+MashNaN ← ↯⊙(⍜▽;⊙∶∶▽,∶⊙∶¬=0×0.∩♭)△.
 
-unit ← ⍚[∞ ¯1]÷√/+×..
+nan ← ÷0 0
+NegToNaN ← (⍜♭(⍜♭(⍜▽(×nan)∶)∶)<tm.)
+Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶∶√/+×..
 
-norm ← (
-  &pf "X"
-  # Save forgetten thing to use later
-  # This should really be saved in a different way
-  ⊙⊙⊙∶⊙⊙∶⊙∶.
-  ∶⊙∶∶/+×..∶∺-sp
-  ⊙⊙∶∺(/+×),,
-  +∶×.,¯∺×⊙,-×.rad≡/+×.∶
-  /↧⍘⍉∺'÷∶+¯∶∵⊟¯.√
+[⍥.-1sm]⊠(⊂∶0⊂∶)⇡ih⇡iw
++pz×pduv⍘⍉
++×pduv-0.5Rv △.
+⊙-.⍘⍉↯∶cc↻1△.
+⊙.⊙(∶↯∶1△.)
 
-  # is there a better way to set negative values to NaN?
-  ×+1√¯<0.
-  ×1+×0∶⍚[0 1]⊗⊙'⍉∶.⊙∶./↧.
+# run sampling
+⍥(
+  &pf "█"
+  # Hit each sphere at time or nan
+  # orig cdir fdir color
+  ∺'/+×,,⊙∶∺-c.
+  # bhalf oc cdir orig fdir color
+  ⊙(∺×⊙(./+×..)-×.r≡/+×.)
+  # bhalf ac a cdir orig fdir color
+  √-∶×.,∶
+  # sqrtd bhalf a cdir orig fdir color
+  ∺'÷∶↧∩NegToNaN⊃+-⊙¯
+  # minroots cdir orig fdir color
+  +×⧻c¬=0×0,⊙/↧⍚1'⊢⌂⍉. # Note: makes min NaN index overflow
+  # minindex mint cdir orig fdir color
+  ⊙(.+⊙∶∺×,)
+  # minindex pos pos cdir fdir color
+  # Is there a better way to load this stuff???
+  ⊙-∶⍘⍉⍚[0 ∞](|2 ⍣⊡([nan nan nan];;;)),c
+  ⊙(∺'÷∶∶)∶⍚[0 ∞](|2 ⍣⊡(nan;;;)),r
+  # minindex normal pos cdir fdir color
 
-  # This is not fast, but it works.
-  ⊙(.∺×∶)
-  ⊙∶∶⍘⍉∵(?(⊡∶sp)'↯3),,=0×0.
-  ∵(?(⊡∶rad)∘)
-  # Here is where albedo could be extracted.
-  ⍚[∞ ¯1]÷⊙-
-  # unit random perturbing...This is technically wrong.
-  +unit rv△.
-  # dir rt oldr olda ccr to (rt+ccr) dir mergedR mergedA
-  +⊙∶⊙⊙∶⊙⊙⊙∶∶
-  ⊙(⊙'∶mashNaN.)
-  ⊙(⊙∶∶×↧1+0.5¬=0×0,∶)
-)
-
-;;⍥norm md ccr r r a
-
+  # update color and scatter by material type
+  ∶⍘⍉⍚[0 ∞](|2 ⍣⊡([1 1 1];;;)),mc
+  ⍚[0 ∞](|2 ⍣⊡(nan;;;))∶mt
+  # mt mc normal pos cdir fdir color
+  # For now, just ignoriing material type and doing lambertian
+  ⊙⊙⊙;;
+  # mc normal pos fdir color
+  ⊙(+⊙(∺×∶)∺×∶¬,∶/↧<ⁿ¯8 10.+Ru△..)
+  # mc ndir pos fdir color
+  ⊙(⊙(⊙×∶)∶)∶
+  # ndir pos fdir color
+  ⊙(⊙MashNaN.)∶
+  # pos ndir fdir color
+)md
 &p ""
 
-⍉+⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1unit
-√ ⍉÷⊙/+⧻.⍉⍉
-√×⍉÷⊙/+⧻.⍘⍉∶
+;;
+√÷∶/+∶⧻.⍉ ×Bgd
 &ims
