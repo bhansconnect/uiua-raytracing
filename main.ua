@@ -33,10 +33,7 @@ ulc ← -÷2vu -÷2vv -[0 0 fl] cc
 pz ← +×0.5pduv ulc
 
 Rv ← ↯∶[⍥⚂]/×.
-# TODO: Still not fully happy with this, is box muller better
-# Maybe less repeats?
-tries ← 10 # technically should be ∞
-Ru ← ⍘⍉∵(|1 ⍥(⎋≤1/+×..-1×2[⚂⚂⚂];)tries)↯∶0↘1
+Ru ← ↯⊂3∶⊂⊟⊙(×○)×○+η,,⊃(×τ[⍥⚂])(○⍘(○+η).-1×2[⍥⚂])/×.↘1
 
 nan ← ÷0 0
 NegToNaN ← +√¯<tm.
