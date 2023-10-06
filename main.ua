@@ -33,17 +33,17 @@ ulc ← -÷2vu -÷2vv -[0 0 fl] cc
 pz ← +×0.5pduv ulc
 
 Rv ← ↯∶[⍥⚂]/×.
-tries ← 1 # technically should be ∞
-Ru ← (
-  ⊙↯↯,1∶2
-  ;⍥(⎋=0/↥♭∶↯⊂3△..>1/+×..↯⊙⍜▽(-1×2[⍥⚂]⧻)⊙∩♭△.)tries
-)
-
-# TODO: find  better way to do this
-MashNaN ← ↯⊙(⍜▽;⊙∶∶▽,∶⊙∶¬=0×0.∩♭)△.
+# TODO: Figure out sampling, maybe box muller?
+Ru ← Rv
+# tries ← 1 # technically should be ∞
+# Ru ← (
+#   ⊙↯↯,1∶2
+#   ;⍥(⎋=0/↥♭∶↯⊂3△..>1/+×..↯⊙⍜▽(-1×2[⍥⚂]⧻)⊙∩♭△.)tries
+# )
 
 nan ← ÷0 0
-NegToNaN ← (⍜♭(⍜♭(⍜▽(×nan)∶)∶)<tm.)
+NegToNaN ← +√¯<tm.
+MashNaN ← ⍚[0 1]⊡⊙'⍉⊟¬=0×0.
 Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶∶√/+×..
 
 Step ← (
@@ -62,13 +62,13 @@ Step ← (
   ⊙(.+⊙∶∺×,)
   # minindex pos pos cdir fdir color
   # Is there a better way to load this stuff???
-  ⊙-∶⍘⍉⍚[0 ∞](|2 ⍣⊡([nan nan nan];;;)),c
-  ⊙(∺'÷∶∶)∶⍚[0 ∞](|2 ⍣⊡(nan;;;)),r
+  ⊙-∶⍘⍉⍚[0 ∞]⊡,⊂c[nan nan nan]
+  ⊙(∺'÷∶∶)∶⍚[0 ∞]⊡,⊂r nan
   # minindex normal pos cdir fdir color
 
   # update color and scatter by material type
-  ∶⍘⍉⍚[0 ∞](|2 ⍣⊡([1 1 1];;;)),mc
-  ⍚[0 ∞](|2 ⍣⊡(nan;;;))∶mt
+  ∶⍘⍉⍚[0 ∞]⊡,⊂mc[1 1 1]
+  ⍚[0 ∞]⊡∶⊂mt nan
   # mt mc normal pos cdir fdir color
   # For now, just ignoriing material type and doing lambertian
   ⊙⊙⊙;;
@@ -82,21 +82,25 @@ Step ← (
 )
 
 R ← (
-  /↧=0×0⍉⊢⍘⍉.
+  # Look into re-enabling this and other keeps when perf improved
+  # /↧=0×0⍉⊢⍘⍉.
   ⍥(
     &pf "█"
-    ⍜▽(⍜⍘⍉(|1
-        /∘⇌
-        ∩∩⍉
-        Step
-        ∩∩⍉
-        [⊙⊙⊙∘]
-      ))
+    # ⍜▽(
+    ⍜⍘⍉(|1
+      /∘⇌
+      ∩∩⍉
+      Step
+      ∩∩⍉
+      [⊙⊙⊙∘]
+    )
+    # )
     # break all nan in new rays
     /↧=0×0⍉⊢⍘⍉.
-    ⎋=0/↥.
+    # .
+    ⎋=0/↥
   )md
-  ;
+  # ;
 )
 
 # run sampling
