@@ -1,3 +1,5 @@
+tc ← 7
+
 ar ← ÷9 16
 iw ← 50
 vh ← 2
@@ -44,14 +46,6 @@ nan ← ÷0 0
 NegToNaN ← (⍜♭(⍜♭(⍜▽(×nan)∶)∶)<tm.)
 Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶∶√/+×..
 
-↯[¯1 3][⍥.-1sm]⊠(⊂∶0⊂∶)⇡ih⇡iw
-+pz×pduv⍘⍉
-+×pduv-0.5Rv △.
-⊙-.⍘⍉↯∶cc↻1△.
-⊙.⊙(∶↯∶1△.)
-
-# run sampling
-
 Step ← (
   # Hit each sphere at time or nan
   # orig cdir fdir color
@@ -87,25 +81,40 @@ Step ← (
   # pos ndir fdir color
 )
 
+R ← (
+  /↧=0×0⍉⊢⍘⍉.
+  ⍥(
+    &pf "█"
+    ⍜▽(⍜⍘⍉(|1
+        /∘⇌
+        ∩∩⍉
+        Step
+        ∩∩⍉
+        [⊙⊙⊙∘]
+      ))
+    # break all nan in new rays
+    /↧=0×0⍉⊢⍘⍉.
+    ⎋=0/↥.
+  )md
+  ;
+)
+
+# run sampling
+↯[¯1 3][⍥.-1sm]⊠(⊂∶0⊂∶)⇡ih⇡iw
++pz×pduv⍘⍉
++×pduv-0.5Rv △.
+⊙-.⍘⍉↯∶cc↻1△.
+⊙.⊙(∶↯∶1△.)
+
 ∩∩⍉
 ⍉[⊙⊙⊙∘]
-/↧=0×0⍉⊢⍘⍉.
-⍥(
-  &pf "█"
-  ⍜▽(⍜⍘⍉(|1
-      /∘⇌
-      ∩∩⍉
-      Step
-      ∩∩⍉
-      [⊙⊙⊙∘]
-    ))
-  # break all nan in new rays
-  /↧=0×0⍉⊢⍘⍉.
-  ⎋=0/↥.
-)md
+⌈÷tc ⧻.
+ts ← 
+;⍥(↘ts∶↰R↙ts.)tc
+⍥(⊂↲∶)-1tc↲
 &p ""
 
-;;/∘⇌⍘⍉;
+;;/∘⇌⍘⍉
 ∩⍉
 √÷∶/+∶⧻.↯[sm ih iw 3]⍉ ×Bgd
 
