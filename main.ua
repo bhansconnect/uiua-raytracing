@@ -55,7 +55,6 @@ Step ← (
   # minindex mint cdir orig fdir color
   ⊙(.+⊙∶∺×,)
   # minindex pos pos cdir fdir color
-  # Is there a better way to load this stuff???
   ⊙-∶⍘⍉⍚[0 ∞]⊡,⊂c[nan nan nan]
   ⊙(∺'÷∶∶)∶⍚[0 ∞]⊡,⊂r nan
   # minindex normal pos cdir fdir color
