@@ -33,13 +33,10 @@ ulc ← -÷2vu -÷2vv -[0 0 fl] cc
 pz ← +×0.5pduv ulc
 
 Rv ← ↯∶[⍥⚂]/×.
-# TODO: Figure out sampling, maybe box muller?
-Ru ← Rv
-# tries ← 1 # technically should be ∞
-# Ru ← (
-#   ⊙↯↯,1∶2
-#   ;⍥(⎋=0/↥♭∶↯⊂3△..>1/+×..↯⊙⍜▽(-1×2[⍥⚂]⧻)⊙∩♭△.)tries
-# )
+# TODO: Still not fully happy with this, is box muller better
+# Maybe less repeats?
+tries ← 10 # technically should be ∞
+Ru ← ⍘⍉∵(|1 ⍥(⎋≤1/+×..-1×2[⚂⚂⚂];)tries)↯∶0↘1
 
 nan ← ÷0 0
 NegToNaN ← +√¯<tm.
