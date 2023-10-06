@@ -86,61 +86,26 @@ Step ← (
   ⊙(⊙MashNaN.)∶
   # pos ndir fdir color
 )
+
 ∩∩⍉
-/↧=0×0⍉.
+⍉[⊙⊙⊙∘]
+/↧=0×0⍉⊢⍘⍉.
 ⍥(
   &pf "█"
-  # Only run on non nan rays
-  # Monter function to under keep all 4 arrays
-  ,∶
-  # m d1 m d2 d3 d4
-  ⍜▽(
-    # k1 m d2 d3 d4
-    ⊙⊙⊙∶⊙⊙∶⊙∶∶
-    # m d2 d3 d4 k1
-    ,∶
-    # m d2 m d3 d4 k1
-    ⍜▽(
-      # k2 m d3 d4 k1
-      ⊙⊙⊙∶⊙⊙∶⊙∶∶
-      # m d3 d4 k1 k2
-      ,∶
-      # m d3 m d4 k1 k2
-      ⍜▽(
-        # k3 m d4 k1 k2
-        ⊙⊙⊙∶⊙⊙∶⊙∶∶
-        # m d4 k1 k2 k3
-        ⍜▽(
-          # k4 k1 k2 k3
-          ⊙⊙∶⊙∶∶
-          # k1 k2 k3 k4
-          # do original function
-          ∩∩⍉
-          Step
-          ∩∩⍉
-          # k1 k2 k3 k4
-          ∶⊙∶⊙⊙∶
-          # k4 k1 k2 k3
-        )
-        # d4 k1 k2 k3
-        ∶⊙∶⊙⊙∶
-        # k3 d4 k1 k2
-      )
-      # d3 d4 k1 k2
-      ∶⊙∶⊙⊙∶
-      # k2 d3 d4 k1
-    )
-    # d2 d3 d4 k1
-    ∶⊙∶⊙⊙∶
-    # k1 d2 d3 d4
-  )
+  ⍜▽(⍜⍘⍉(|1
+      /∘⇌
+      ∩∩⍉
+      Step
+      ∩∩⍉
+      [⊙⊙⊙∘]
+    ))
   # break all nan in new rays
-  /↧=0×0⍉.
+  /↧=0×0⍉⊢⍘⍉.
   ⎋=0/↥.
 )md
 &p ""
 
-;;;
+;;/∘⇌⍘⍉;
 ∩⍉
 √÷∶/+∶⧻.↯[sm ih iw 3]⍉ ×Bgd
 
