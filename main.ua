@@ -51,7 +51,7 @@ Step ← (
   # sqrtd bhalf a cdir orig fdir color
   ∺'÷∶↧∩NegToNaN⊃+-⊙¯
   # minroots cdir orig fdir color
-  +×⧻c¬=0×0,⊙/↧⍚1'⊢⌂⍉. # Note: makes min NaN index overflow
+  +×⧻c¬=0×0,⊙/↧⍚1'⊢⍏⍉. # Note: makes min NaN index overflow
   # minindex mint cdir orig fdir color
   ⊙(.+⊙∶∺×,)
   # minindex pos pos cdir fdir color
@@ -76,24 +76,21 @@ Step ← (
 
 R ← (
   # Look into re-enabling this and other keeps when perf improved
-  # /↧=0×0⍉⊢⍘⍉.
-  ⍥(
+  /↧=0×0⍉⊢⍘⍉.
+  ⍥(|2.2
     &pf "█"
-    # ⍜▽(
-    ⍜⍘⍉(|1
-      /∘⇌
-      ∩∩⍉
-      Step
-      ∩∩⍉
-      [⊙⊙⊙∘]
-    )
-    # )
+    ⍜▽(|1 ⍜⍘⍉(|1
+        /∘⇌
+        ∩∩⍉
+        Step
+        ∩∩⍉
+        [⊙⊙⊙∘]
+      ))
     # break all nan in new rays
     /↧=0×0⍉⊢⍘⍉.
-    # .
-    ⎋=0/↥
+    ⎋=0/↥.
   )md
-  # ;
+  ;
 )
 
 # run sampling
