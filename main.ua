@@ -5,34 +5,40 @@ md ← 50
 sm ← 10
 
 ar ← ÷9 16
-vfov ← 90
-cc ← [0 0 0]
+vfov ← 20
+cc ← [¯2 2 1]
+la ← [0 0 ¯1]
+vup ← [0 1 0]
 
 lam ← 0
 met ← 1
-R ← ○+η÷4π
-c ← [[¯R 0 ¯1] [R 0 ¯1]]
-r ← [R R]
-mc ← [[0 0 1] [1 0 0]]
-d ← [[0 0 0] [0 0 0]]
-mt ← [lam lam]
+c ← [[0 ¯100.5 ¯1] [0 0 ¯1] [¯1 0 ¯1] [1 0 ¯1]]
+r ← [100 0.5 0.5 0.5]
+mc ← [[0.8 0.8 0] [0.1 0.2 0.5] [0.8 0.8 0.8] [0.8 0.6 0.2]]
+d ← [[0 0 0] [0 0 0] [0.3 0.3 0.3] [0.1 0.1 0.1]]
+mt ← [lam lam met met]
 
-fl ← 1
+Cross ← -⊙(×⊙'↻¯1↻1)×⊙'↻1↻¯1,,
+
+fl ← √/+×.-la cc
 theta ← ÷180×πvfov
 h ← ÷⊃(○+η)○÷2theta
 vh ← ××2 h fl
 ih ← ↥1⌊÷ar iw
 vw ← ×vh ÷ih iw
 
-vu ← [vw 0 0]
-vv ← [0 ¯vh 0]
+w ← ÷√/+×..-la cc
+u ← ÷√/+×.. Cross vup w
+v ← Cross w u
+
+vu ← ×u vw
+vv ← ×¯v vh
 
 pdu ← ÷iw vu
 pdv ← ÷ih vv
-pduv ← +pdu pdv
 
-ulc ← -÷2vu -÷2vv -[0 0 fl] cc
-pz ← +×0.5pduv ulc
+ulc ← -÷2vu -÷2vv -×fl w cc
+pz ← +×0.5+pdv pdu ulc
 
 Rv ← ↯∶[⍥⚂]/×.
 Ru ← ↯⊂3∶⊂⊟⊙(×○)×○+η,,⊃(×τ[⍥⚂])(○⍘(○+η).-1×2[⍥⚂])/×.↘1
@@ -54,7 +60,7 @@ Step ← (|4.4
   # sqrtd bhalf a cdir orig fdir color
   ∺'÷∶↧∩NegToNaN⊃+-⊙¯
   # minroots cdir orig fdir color
-  +×⧻c¬=0×0,⊙/↧⍚1'⊢⍏⍉. # Note: makes min NaN index overflow
+  +×⧻c¬=0×0,⊙/↧≡'⊢⍏⍉. # Note: makes min NaN index overflow
   # minindex mint cdir orig fdir color
   ⊙(.+⊙∶∺×,)
   # minindex pos pos cdir fdir color
@@ -66,7 +72,7 @@ Step ← (|4.4
   ∶⍘⍉⍚[0 ∞]⊡,⊂d [nan nan nan]
   ∶⍘⍉⍚[0 ∞]⊡,⊂mc[1 1 1]
   ⍚[0 ∞]⊡∶⊂mt nan
-  # mt mc d normal pos cdir fdir color
+  # mt mc d normal cdir pos fdir color
   ∶⊙(⍘⍉⊂⊂⊟)
   # mc_d_normal_cdir mt pos fdir color
 
@@ -112,13 +118,15 @@ R ← (
     ⎋=0/↥.
   )md
   # Make the color of still live rays black.
-  ⍜⍘⍉(⍜'⊡3×)∶¬
+  # ⍜⍘⍉(⍜'⊡3×)∶¬
+  ;
 )
 
 # run sampling
-↯[¯1 3][⍥.-1sm]⊠(⊂∶0⊂∶)⇡ih⇡iw
-+pz×pduv⍘⍉
-+×pduv-0.5Rv △.
+⍉↯[¯1 3]↯⊂sm△.⊠+∺×⇡ih pdv ∺×⇡iw pdu
++∺×pdu-0.5Rv [⊢⇌]△.
++∺×pdv-0.5Rv [⊢⇌]△.
++pz
 ⊙-.⍘⍉↯∶cc↻1△.
 ⊙.⊙(∶↯∶1△.)
 
