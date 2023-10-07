@@ -17,6 +17,7 @@ met ← 1
 c ← [[0 0 ¯1] [0 ¯100.5 ¯1] [¯1 0 ¯1] [1 0 ¯1]]
 r ← [0.5 100 0.5 0.5]
 mc ← [[0.7 0.3 0.3] [0.8 0.8 0] [0.8 0.8 0.8] [0.8 0.6 0.2]]
+d ← [[0 0 0] [0 0 0] [0.3 0.3 0.3] [1 1 1]]
 mt ← [lam lam met met]
 
 ih ← ↥1⌊÷ar iw
@@ -40,7 +41,7 @@ NegToNaN ← +√¯<tm.
 MashNaN ← ⍚[0 1]⊡⊙'⍉⊟¬=0×0.
 Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶∶√/+×..
 
-Step ← (
+Step ← (|4.4
   # Hit each sphere at time or nan
   # orig cdir fdir color
   ∺'/+×,,⊙∶∺-c.
@@ -56,17 +57,31 @@ Step ← (
   ⊙(.+⊙∶∺×,)
   # minindex pos pos cdir fdir color
   ⊙-∶⍘⍉⍚[0 ∞]⊡,⊂c[nan nan nan]
-  ⊙(∺'÷∶∶)∶⍚[0 ∞]⊡,⊂r nan
-  # minindex normal pos cdir fdir color
+  ⊙⊙∶⊙(∺'÷∶∶)∶⍚[0 ∞]⊡,⊂r nan
+  # minindex normal cdir pos fdir color
 
   # update color and scatter by material type
+  ∶⍘⍉⍚[0 ∞]⊡,⊂d [nan nan nan]
   ∶⍘⍉⍚[0 ∞]⊡,⊂mc[1 1 1]
   ⍚[0 ∞]⊡∶⊂mt nan
-  # mt mc normal pos cdir fdir color
-  # For now, just ignoriing material type and doing lambertian
-  ⊙⊙⊙;;
-  # mc normal pos fdir color
-  ⊙(+⊙(∺×∶)∺×∶¬,∶/↧<ⁿ¯8 10.+Ru△..)
+  # mt mc d normal pos cdir fdir color
+  ∶⊙(⍘⍉⊂⊂⊟)
+  # mc_d_normal_cdir mt pos fdir color
+
+  # TODO: Is under keep better
+  # Or should I run all material functions on all spheres
+  ⍜▽(|1 ⍜⍉(|1
+      /∘⇌
+      ⊙⊙(+⊙(∺×∶)∺×∶¬,∶/↧<ⁿ¯8 10.+Ru△..)
+      [⊙⊙⊙∘]
+    ))=lam,
+  ⍜▽(|1 ⍜⍉(|1
+      /∘⇌
+      ⊙⊙(+⊙(∺×∶)∺×∶¬,∶/↧<ⁿ¯8 10.+Ru△..)
+      [⊙⊙⊙∘]
+    ))=met,
+  # mc_d_ndir_cdir mt pos fdir color
+  ⊙'⊙⊙;;/∘⇌⍉⊙;
   # mc ndir pos fdir color
   ⊙(⊙(⊙×∶)∶)∶
   # ndir pos fdir color
