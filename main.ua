@@ -110,7 +110,8 @@ R ← (
     /↧=0×0⍉⊢⍘⍉.
     ⎋=0/↥.
   )md
-  ;
+  # Make the color of still live rays black.
+  ⍜⍘⍉(⍜'⊡3×)∶¬
 )
 
 # run sampling
