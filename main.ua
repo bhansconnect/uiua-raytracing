@@ -1,4 +1,4 @@
-tc ← 7
+tc ← -1NumProcs
 
 ar ← ÷9 16
 iw ← 50
