@@ -40,6 +40,7 @@ nan ← ÷0 0
 NegToNaN ← +√¯<tm.
 MashNaN ← ⍚[0 1]⊡⊙'⍉⊟¬=0×0.
 Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶∶√/+×..
+Ref ← -⍚[∞ 1]××2/+×,,
 
 Step ← (|4.4
   # Hit each sphere at time or nan
@@ -77,11 +78,15 @@ Step ← (|4.4
     ))=lam,
   ⍜▽(|1 ⍜⍉(|1
       /∘⇌
-      ⊙⊙(+⊙(∺×∶)∺×∶¬,∶/↧<ⁿ¯8 10.+Ru△..)
+      # mc d norm cdir
+      ⊙⊙(Ref,,)
+      # mc d ref norm cdir
+      ⊙∶∺×⊙(>0/+×,∶⊙∶+×Ru△.,∶)
+      # mc d ndir cdir
       [⊙⊙⊙∘]
     ))=met,
   # mc_d_ndir_cdir mt pos fdir color
-  ⊙'⊙⊙;;/∘⇌⍉⊙;
+  ⊙⊙;⊙;/∘⇌⍉⊙;
   # mc ndir pos fdir color
   ⊙(⊙(⊙×∶)∶)∶
   # ndir pos fdir color
