@@ -2,9 +2,9 @@ tc ← -1NumProcs
 # tc ← 1
 ss ← ÷tc 50000
 
-iw ← 1200
+iw ← 200
 md ← 20
-sm ← 10
+sm ← 20
 
 ar ← ÷9 16
 vfov ← 20
