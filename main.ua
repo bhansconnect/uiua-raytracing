@@ -7,19 +7,20 @@ sm ← 10
 
 ar ← ÷9 16
 vfov ← 20
-da ← 10
+da ← 0
 fd ← 3.4
-cc ← [¯2 2 1]
+cc ← [0 0 4]
 la ← [0 0 ¯1]
 vup ← [0 1 0]
 
 lam ← 0
 met ← 1
+die ← 2
 c ← [[0 ¯100.5 ¯1] [0 0 ¯1] [¯1 0 ¯1] [1 0 ¯1]]
 r ← [100 0.5 0.5 0.5]
-mc ← [[0.8 0.8 0] [0.1 0.2 0.5] [0.8 0.8 0.8] [0.8 0.6 0.2]]
+mc ← [[0.8 0.8 0] [0.1 0.2 0.5] [1 1 1] [0.8 0.6 0.2]]
 d ← [[0 0 0] [0 0 0] [0.3 0.3 0.3] [0.1 0.1 0.1]]
-mt ← [lam lam met met]
+mt ← [lam lam die met]
 
 Cross ← -⊙(×⊙'↻¯1↻1)×⊙'↻1↻¯1,,
 
@@ -53,7 +54,8 @@ nan ← ÷0 0
 NegToNaN ← +√¯<0.001.
 MashNaN ← ⍚[0 1]⊡⊙'⍉⊟¬=0×0.
 Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶∶√/+×..
-Ref ← -⍚[∞ 1]××2/+×,,
+Refl ← -⍚[∞ 1]××2/+×,,
+Refr ← +¯⍚[∞ 1]×√⌵-∶1/+×.,∶⊙;×⊙(+⍚[∞ 1]×⊙∶↧1/+×¯,,,,)
 
 Step ← (|4.4
   # Hit each sphere at time or nan
@@ -92,12 +94,25 @@ Step ← (|4.4
   ⍜▽(|1 ⍜⍉(|1
       /∘⇌
       # mc d norm cdir
-      ⊙⊙(Ref,,)
+      ⊙⊙(Refl,,)
       # mc d ref norm cdir
       ⊙∶∺×⊙(>0/+×,∶⊙∶+×Rus△.,∶)
       # mc d ndir cdir
       [⊙⊙⊙∘]
     ))=met,
+  ⍜▽(|1 ⍜⍉(|1
+      /∘⇌
+      # mc d outnorm cdir
+      ⊙⊙(⊙'∺×∶.-1+2≤0/+×,,)
+      # mc d ff norm cdir
+      ⊙(⊙⍚[∞ 1]ⁿ,¯∶)
+      # mc d rr norm cdir
+      ⊙⊙⊙(⍚[∞ 1]÷√/+×..,)
+      # mc d rr ud norm cdir
+      ⊙⊙Refr
+      # mc d ndir cdir
+      [⊙⊙⊙∘]
+    ))=die,
   # mc_d_ndir_cdir mt pos fdir color
   ⊙⊙;⊙;/∘⇌⍉⊙;
   # mc ndir pos fdir color
