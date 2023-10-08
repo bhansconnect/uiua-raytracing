@@ -1,15 +1,15 @@
 tc ← -1NumProcs
 # tc ← 1
 
-iw ← 50
+iw ← 100
 md ← 50
-sm ← 10
+sm ← 100
 
 ar ← ÷9 16
-vfov ← 90
-da ← 0
-fd ← 1
-cc ← [0 0 0]
+vfov ← 20
+da ← 10
+fd ← 3.4
+cc ← [¯2 2 1]
 la ← [0 0 ¯1]
 vup ← [0 1 0]
 
