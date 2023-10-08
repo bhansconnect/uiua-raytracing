@@ -1,4 +1,5 @@
 tc ← -1NumProcs
+# tc ← 1
 
 iw ← 50
 md ← 50
@@ -6,6 +7,8 @@ sm ← 10
 
 ar ← ÷9 16
 vfov ← 20
+da ← 10
+fd ← 3.4
 cc ← [¯2 2 1]
 la ← [0 0 ¯1]
 vup ← [0 1 0]
@@ -20,10 +23,10 @@ mt ← [lam lam met met]
 
 Cross ← -⊙(×⊙'↻¯1↻1)×⊙'↻1↻¯1,,
 
-fl ← √/+×.-la cc
 theta ← ÷180×πvfov
 h ← ÷⊃(○+η)○÷2theta
-vh ← ××2 h fl
+dr ← ×fd÷⊃(○+η)○÷2÷180×πda
+vh ← ××2 h fd
 ih ← ↥1⌊÷ar iw
 vw ← ×vh ÷ih iw
 
@@ -33,15 +36,18 @@ v ← Cross w u
 
 vu ← ×u vw
 vv ← ×¯v vh
+du ← ×u dr
+dv ← ×v dr
 
 pdu ← ÷iw vu
 pdv ← ÷ih vv
 
-ulc ← -÷2vu -÷2vv -×fl w cc
+ulc ← -÷2vu -÷2vv -×fd w cc
 pz ← +×0.5+pdv pdu ulc
 
 Rv ← ↯∶[⍥⚂]/×.
-Ru ← ↯⊂3∶⊂⊟⊙(×○)×○+η,,⊃(×τ[⍥⚂])(○⍘(○+η).-1×2[⍥⚂])/×.↘1
+Rus ← ↯⊂3∶⊂⊟⊙(×○)×○+η,,⊃(×τ[⍥⚂])(○⍘(○+η).-1×2[⍥⚂])/×.↘1
+Riud ← ↯⊂2∶⊟⊃(×○)(×○+η)⊃(×τ[⍥⚂])(√[⍥⚂])/×.↘1
 
 nan ← ÷0 0
 NegToNaN ← +√¯<0.001.
@@ -80,7 +86,7 @@ Step ← (|4.4
   # Or should I run all material functions on all spheres
   ⍜▽(|1 ⍜⍉(|1
       /∘⇌
-      ⊙⊙(+⊙(∺×∶)∺×∶¬,∶/↧<ⁿ¯8 10.+Ru△..)
+      ⊙⊙(+⊙(∺×∶)∺×∶¬,∶/↧<ⁿ¯8 10.+Rus△..)
       [⊙⊙⊙∘]
     ))=lam,
   ⍜▽(|1 ⍜⍉(|1
@@ -88,7 +94,7 @@ Step ← (|4.4
       # mc d norm cdir
       ⊙⊙(Ref,,)
       # mc d ref norm cdir
-      ⊙∶∺×⊙(>0/+×,∶⊙∶+×Ru△.,∶)
+      ⊙∶∺×⊙(>0/+×,∶⊙∶+×Rus△.,∶)
       # mc d ndir cdir
       [⊙⊙⊙∘]
     ))=met,
@@ -127,7 +133,8 @@ R ← (
 +∺×pdu-0.5Rv [⊢⇌]△.
 +∺×pdv-0.5Rv [⊢⇌]△.
 +pz
-⊙-.⍘⍉↯∶cc↻1△.
+⍘⍉↯∶cc↻1△.
+⊙-.+ ×>0da /+≡∺×[du dv]Riud△.
 ⊙.⊙(∶↯∶1△.)
 
 ∩∩⍉
