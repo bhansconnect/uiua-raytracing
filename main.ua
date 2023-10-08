@@ -1,5 +1,6 @@
 tc ← -1NumProcs
 # tc ← 1
+ss ← ÷tc 50000
 
 iw ← 1200
 md ← 20
@@ -164,18 +165,26 @@ Step ← (|4.4
   # pos ndir fdir color
 )
 
+StepShard ← (|1 ⍜⍘⍉(|1
+    /∘⇌
+    ∩∩⍉
+    Step
+    ∩∩⍉
+    [⊙⊙⊙∘]
+  ))
+
 R ← (
   # Look into re-enabling this and other keeps when perf improved
   /↧=0×0⍉⊢⍘⍉.
   ⍥(|2.2
     &pf "█"
-    ⍜▽(|1 ⍜⍘⍉(|1
-        /∘⇌
-        ∩∩⍉
-        Step
-        ∩∩⍉
-        [⊙⊙⊙∘]
-      ))
+    ⍜▽(|1
+      # TODO: look into a better way to shard/ other memory reduction ideas.
+      ⊂∶↘1△,⊂∶⌈÷,∶⌈÷ss.⧻.
+      ∶⊙⬚nan↯⧻,
+      ≡StepShard
+      ↙∶/⊂
+    )
     # break all nan in new rays
     /↧=0×0⍉⊢⍘⍉.
     ⎋=0/↥.
