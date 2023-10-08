@@ -73,7 +73,7 @@ Step ← (|4.4
   # bhalf ac a cdir orig fdir color
   √-∶×.,∶
   # sqrtd bhalf a cdir orig fdir color
-  ↧∩NegToNaN⊃(⍚[∞ 1]÷∶+)(⍚[∞ 1]÷∶-)⊙¯
+  /↧⊟∩NegToNaN⊃(⍚[∞ 1]÷∶+)(⍚[∞ 1]÷∶-)⊙¯
   # minroots cdir orig fdir color
   +×⧻c¬=0×0,⊙/↧≡'⊢⍏⍉. # Note: makes min NaN index overflow
   # minindex mint cdir orig fdir color
