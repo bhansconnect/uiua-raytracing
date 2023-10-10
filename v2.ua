@@ -17,11 +17,50 @@ Lambertian ← 0
 Metal ← 1
 Dielectric ← 2
 
-Center ← [[0 ¯1000 0] [0 1 0] [¯4 1 0] [4 1 0]]
-Radius ← [1000 1 1 1]
-Color ← [[0.5 0.5 0.5] [1 1 1] [0.4 0.2 0.1] [0.7 0.6 0.5]]
-Material ← [Lambertian Dielectric Lambertian Metal]
-ExtraData ← [0 1.5 0 0]
+Rv ← ↯∶[⍥⚂]/×.
++×[0.9 0 0.9]Rv△.⍉↯[¯1 3]⊠(⊂⊂∶0.2).-11⇡22
+⍚[∞ 1]▽>0.9√/+×.-[4 0.2 0].
+⍘⍉⊂⊟↯△,0↯△,0.5↯△,0
+∶Rv↙1△.
+⍜▽(|1 
+  ⍜⍉(|1
+    /∘⇌
+    ⊙(×∩Rv.△)
+    ⊙⊙(↯∶Lambertian△)
+    [⊙⊙∘]
+  )
+)<0.8,
+⍜▽(|1 
+  ⍜⍉(|1
+    /∘⇌
+    ⊙(+0.5×0.5Rv△)
+    ↯∶×0.5Rv ↘1.△
+    ⊙⊙(↯∶Metal△)
+    [⊙⊙∘]
+  )
+)↧⊃(≥0.8)(<0.95),
+⍜▽(|1 
+  ⍜⍉(|1
+    /∘⇌
+    ⊙(↯∶1△)
+    ↯∶1.5△
+    ⊙⊙(↯∶Dielectric△)
+    [⊙⊙∘]
+  )
+)≥0.95∶
+∩∩⍉/∘⇌⍉
+ExtraData ←
+Color ←
+≡⊢
+Material ←
+Center ←
+Radius ← ↯⧻ Center 0.2
+
+ExtraData ← ⊂ ⊢⍉ExtraData [0 1.5 0 0]
+Color ← ⊂ Color [[0.5 0.5 0.5] [1 1 1] [0.4 0.2 0.1] [0.7 0.6 0.5]]
+Material ← ⊂ Material [Lambertian Dielectric Lambertian Metal]
+Center ← ⊂ Center [[0 ¯1000 0] [0 1 0] [¯4 1 0] [4 1 0]]
+Radius ← ⊂ Radius [1000 1 1 1]
 
 Cross ← -⊙(×⊙'↻¯1↻1)×⊙'↻1↻¯1,,
 
@@ -46,7 +85,6 @@ PixelDeltaV ← ÷ImageHeight ViewportV
 UpperLeftCorner ← -÷2ViewportU -÷2ViewportV -×FocusDist w CameraCenter
 PixelZero ← +×0.5+PixelDeltaV PixelDeltaU UpperLeftCorner
 
-Rv ← ↯∶[⍥⚂]/×.
 Rus ← ↯⊂3∶⊂⊟⊙(×○)×○+η,,⊃(×τ[⍥⚂])(○⍘(○+η).-1×2[⍥⚂])/×.↘1
 Riud ← ↯⊂2∶⊟⊃(×○)(×○+η)⊃(×τ[⍥⚂])(√[⍥⚂])/×.↘1
 
@@ -176,15 +214,13 @@ SampleN ← (|1
 
 ThreadSize ← ⌈÷ThreadCount Samples
 
-0
 ≠Samples×ThreadCount ThreadSize
-?(&p $"Increasing sample size from _ to _ to evenly utilize threads"Samples ×ThreadCount ThreadSize)∘
+?(|0.0 &p $"Increasing sample size from _ to _ to evenly utilize threads"Samples ×ThreadCount ThreadSize)(|0.0 ;0)
 ≤1ThreadCount
-?(SampleN Samples)(|0
+?(|0 SampleN Samples)(|0
   ⍥(spawn(SampleN ThreadSize))ThreadCount
   ⍥(+wait∶)-1ThreadCount wait
 )
-⊙;
 ÷×ThreadCount ThreadSize
 
 &p ""
