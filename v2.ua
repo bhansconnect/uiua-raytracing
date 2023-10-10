@@ -87,19 +87,20 @@ LambertianScatter ← (|5.2
   ∩∺×,∶=Lambertian
 )
 
-StepRays ← (|2.3
-  # Origin Direction
+StepRays ← (|3.4
+  # Origin Direction I
   Center ⊙∶∶Radius,,
   ⍚[¯1 ∞ ∞ ¯1]HitTimes
-  # TODO: investigate skipping all NaN indices for the rest of the function.
-  +×⧻Center≠0×0,⊙/↧≡'⊢⍏⍉. # Note: makes min NaN index overflow
+  =0×0,⊙/↧≡'⊢⍏⍉.
+  # Remove NaN rays from rest of computation
+  ⊙⊙⊙⊙▽⊙⊙⊙(∺▽,∶)⊙⊙(∺▽,∶)⊙(▽,∶)▽,∶
   ⊙(⊙∶.+⊙∶∺×⊙.⊙∶)
-  ⊙-∶⍉⬚NaN⊏,Center
-  ⊙∺÷∶⬚NaN⊏,Radius
+  ⊙-∶⍉⊏,Center
+  ⊙∺÷∶⊏,Radius
 
-  ∶⬚NaN⊏,ExtraData
-  ∶⍉⬚1⊏,Color
-  ⬚NaN⊏∶Material
+  ∶⊏,ExtraData
+  ∶⍉⊏,Color
+  ⊏∶Material
   # TODO: Should these use under keep to avoid extra work of applying to non-matching rays.
   ∺×≠Lambertian,,
   ⊙LambertianScatter
@@ -119,15 +120,10 @@ Sample ← (
   ⍥(
     StepRays
     # col ori dir I oldcol olddir
-    # Remove NaNs
-    ⊙(/↧=0×0.)
-    ⍜⍉(▽,)
-    ⊙(⍜⍉(▽,)∶)
-    ⊙⊙(⍜⍉(▽,)∶)
-    ⊙⊙⊙(,∶▽)
     # Merge
     # This is a mess, but it just does some under select based merging after shuffling the stack.
     # It is also the core slowness of the entire code.
+    ⊙⊙⊙(,∶)
     ⊙⊙∶⊙∶∶
     ⊙⊙⊙(⍜⊏(×⊙⍉)⊙∶∶⊙,)
     ⊙⊙⊙⊙⊙∶⊙⊙⊙⊙∶⊙⊙⊙∶⊙⊙∶⊙.
