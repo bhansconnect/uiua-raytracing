@@ -54,7 +54,6 @@ NaN ← ÷0 0
 
 # TODO: Re-evaluate and clean rewrite maybe
 NegToNaN ← +√¯<0.001.
-MashNaN ← ↯⊙(⍜▽;⊙∶∶▽,∶=0×0.∩♭)△.
 Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶∶√/+×..
 Refl ← -⍚[∞ 1]××2/+×,,
 Refr ← (
@@ -111,11 +110,6 @@ StepRays ← (
   ⊙∶
 )
 
-BlackenLiveRays ← (
-  # Rays Colors
-  ×¬=0×0
-)
-
 Sample ← (
   PixelCenters
   +∺×PixelDeltaU-0.5Rv [⊢⇌]△.
@@ -123,16 +117,28 @@ Sample ← (
   +PixelZero
   ⍘⍉↯∶CameraCenter↻1△.
   ⊙-.+ ×>0DefocusAngle /+≡∺×[DefocusDiskU DefocusDiskV]Riud△.
-  ⊙(⊙(↯∶1△.).)
+  ⊙(⊙(⇡⊡1△.↯∶1△.).)
+  ⊙⊙(⊙∩⍉⍉)
   ⍥(
     # TODO: Should we under keep on NaN for StepRays?
     StepRays
-    ⊙⊙×⊙∶∶
-    ⊙',∶
-    ⊙⊙⊙MashNaN
+    # col ori dir I oldcol olddir
+    # Remove NaNs
+    ⊙(/↧=0×0.)
+    ⍜⍉(▽,)
+    ⊙(⍜⍉(▽,)∶)
+    ⊙⊙(⍜⍉(▽,)∶)
+    ⊙⊙⊙(,∶▽)
+    # Merge
+    ⊙⊙∶⊙∶∶
+    ⊙⊙⊙(⍜⊏(×⊙⍉)⊙∶∶⊙,)
+    ⊙⊙⊙⊙⊙∶⊙⊙⊙⊙∶⊙⊙⊙∶⊙⊙∶⊙.
+    ⊙⊙⊙⊙(⍜⊏(⍉;))
+    ⎋=0/×△.
   )MaxDepth
-  ;
-  BlackenLiveRays
+  ;;
+  ⍜⊏(↯∶0△)
+  ∩⍉
   ×⊙Bgd
   &pf "█"
 )
