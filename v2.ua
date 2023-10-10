@@ -54,7 +54,7 @@ NaN ← ÷0 0
 
 # TODO: Re-evaluate and clean rewrite maybe
 NegToNaN ← +√¯<0.001.
-MashNaN ← ⍚[0 1]⊡⊙'⍉⊟¬=0×0.
+MashNaN ← ↯⊙(⍜▽;⊙∶∶▽,∶=0×0.∩♭)△.
 Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶∶√/+×..
 Refl ← -⍚[∞ 1]××2/+×,,
 Refr ← (
