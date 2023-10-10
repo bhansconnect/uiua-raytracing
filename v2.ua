@@ -120,7 +120,6 @@ Sample ← (
   ⊙(⊙(⇡⊡1△.↯∶1△.).)
   ⊙⊙(⊙∩⍉⍉)
   ⍥(
-    # TODO: Should we under keep on NaN for StepRays?
     StepRays
     # col ori dir I oldcol olddir
     # Remove NaNs
@@ -130,6 +129,8 @@ Sample ← (
     ⊙⊙(⍜⍉(▽,)∶)
     ⊙⊙⊙(,∶▽)
     # Merge
+    # This is a mess, but it just does some under select based merging after shuffling the stack.
+    # It is also the core slowness of the entire code.
     ⊙⊙∶⊙∶∶
     ⊙⊙⊙(⍜⊏(×⊙⍉)⊙∶∶⊙,)
     ⊙⊙⊙⊙⊙∶⊙⊙⊙⊙∶⊙⊙⊙∶⊙⊙∶⊙.
