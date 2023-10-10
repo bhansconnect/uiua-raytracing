@@ -1,9 +1,9 @@
 # ThreadCount ← -1NumProcs
 ThreadCount ← 1
 
-ImageWidth ← 1200
-MaxDepth ← 1
-Samples ← 21
+ImageWidth ← 200
+MaxDepth ← 50
+Samples ← 10
 
 AspectRatio ← ÷9 16
 VerticalFov ← 20
@@ -144,13 +144,15 @@ SampleN ← (|1
 
 ThreadSize ← ⌈÷ThreadCount Samples
 
+0
 ≠Samples×ThreadCount ThreadSize
 ?(&p $"Increasing sample size from _ to _ to evenly utilize threads"Samples ×ThreadCount ThreadSize)∘
 ≤1ThreadCount
-?(SampleN Samples)(|1
+?(SampleN Samples)(|0
   ⍥(↰(SampleN ThreadSize))ThreadCount
   ⍥(+↲∶)-1ThreadCount ↲
 )
+⊙;
 ÷×ThreadCount ThreadSize
 
 &p ""
