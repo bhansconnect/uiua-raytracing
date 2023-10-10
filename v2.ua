@@ -54,18 +54,18 @@ NaN ← ÷0 0
 
 # TODO: Re-evaluate and clean rewrite maybe
 NegToNaN ← +√¯<0.001.
-Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶∶√/+×..
+Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺÷√/+×..
 Refl ← -⍚[∞ 1]××2/+×,,
 Refr ← (
   # r uv n
   ⊙(↧1/+×¯,,)
   # r ct uv n
-  ×⊙(+⍚[∞ 1]×⊙,)
+  ×⊙(+∺×⊙,)
   # perp n
-  +⍚[∞ 1]×¯√⌵-∶1/+×.,∶
+  +∺×¯√⌵-∶1/+×.,∶
 )
 
-PixelCenters ← ⍉↯[¯1 3]⊠+∺×⇡ImageHeight PixelDeltaV ∺×⇡ImageWidth PixelDeltaU
+PixelCenters ← ⍉↯[¯1 3]⊠+∺×PixelDeltaV ⇡ImageHeight ∺×PixelDeltaU ⇡ImageWidth
 
 HitTimes ← (|4
   # Center Origin Direction Radius
@@ -78,33 +78,30 @@ HitTimes ← (|4
   /↧NegToNaN⊟⊃(÷∶+)(÷∶-)√∶¯
 )
 
-LambertianScatter ← (
-  # TODO: add signiture when level fixed |5.2
+LambertianScatter ← (|5.2
   # Material Color ExtraData Normal Direction
   ⊙(
     ⊙⊙;⊙;
-    ⊙(+⊙⍚[∞ ¯1]×⍚[∞ ¯1]×¬,∶/↧<ⁿ¯8 10.+Rus△..)
+    ⊙(+⊙∺×∺×¬,∶/↧<ⁿ¯8 10.+Rus△..)
   )
-  # TODO: Switch to both when level fixed
-  ⊙⍚[∞ ¯1]×⍚[∞ ¯1]×,∶=Lambertian
+  ∩∺×,∶=Lambertian
 )
 
-StepRays ← (
-  # TODO: add signiture when level fixed |2.3
+StepRays ← (|2.3
   # Origin Direction
   Center ⊙∶∶Radius,,
   ⍚[¯1 ∞ ∞ ¯1]HitTimes
   # TODO: investigate skipping all NaN indices for the rest of the function.
-  +×⧻Center¬=0×0,⊙/↧≡'⊢⍏⍉. # Note: makes min NaN index overflow
-  ⊙(⊙∶.+⊙∶∺×,⊙∶)
+  +×⧻Center≠0×0,⊙/↧≡'⊢⍏⍉. # Note: makes min NaN index overflow
+  ⊙(⊙∶.+⊙∶∺×⊙.⊙∶)
   ⊙-∶⍉⬚NaN⊏,Center
-  ⊙(⍚[∞ ¯1]÷)∶⬚NaN⊏,Radius
+  ⊙∺÷∶⬚NaN⊏,Radius
 
   ∶⬚NaN⊏,ExtraData
   ∶⍉⬚1⊏,Color
   ⬚NaN⊏∶Material
   # TODO: Should these use under keep to avoid extra work of applying to non-matching rays.
-  ⍚[∞ ¯1]×≠Lambertian,,
+  ∺×≠Lambertian,,
   ⊙LambertianScatter
   +
   ⊙∶
@@ -112,11 +109,11 @@ StepRays ← (
 
 Sample ← (
   PixelCenters
-  +∺×PixelDeltaU-0.5Rv [⊢⇌]△.
-  +∺×PixelDeltaV-0.5Rv [⊢⇌]△.
+  +∺×∶PixelDeltaU-0.5Rv [⊢⇌]△.
+  +∺×∶PixelDeltaV-0.5Rv [⊢⇌]△.
   +PixelZero
   ⍘⍉↯∶CameraCenter↻1△.
-  ⊙-.+ ×>0DefocusAngle /+≡∺×[DefocusDiskU DefocusDiskV]Riud△.
+  ⊙-.+ ×>0DefocusAngle /+≡∺×∶[DefocusDiskU DefocusDiskV]Riud△.
   ⊙(⊙(⇡⊡1△.↯∶1△.).)
   ⊙⊙(⊙∩⍉⍉)
   ⍥(
@@ -156,8 +153,8 @@ ThreadSize ← ⌈÷ThreadCount Samples
 ?(&p $"Increasing sample size from _ to _ to evenly utilize threads"Samples ×ThreadCount ThreadSize)∘
 ≤1ThreadCount
 ?(SampleN Samples)(|0
-  ⍥(↰(SampleN ThreadSize))ThreadCount
-  ⍥(+↲∶)-1ThreadCount ↲
+  ⍥(spawn(SampleN ThreadSize))ThreadCount
+  ⍥(+wait∶)-1ThreadCount wait
 )
 ⊙;
 ÷×ThreadCount ThreadSize

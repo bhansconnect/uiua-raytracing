@@ -7,16 +7,16 @@ md ← 20
 sm ← 20
 
 ar ← ÷9 16
-vfov ← 20
+VFov ← 20
 da ← 0.6
 fd ← 10
 cc ← [13 2 3]
 la ← [0 0 0]
-vup ← [0 1 0]
+Vup ← [0 1 0]
 
-lam ← 0
-met ← 1
-die ← 2
+Lam ← 0
+Met ← 1
+Die ← 2
 
 Rv ← ↯∶[⍥⚂]/×.
 
@@ -24,26 +24,32 @@ Rv ← ↯∶[⍥⚂]/×.
 ⍚[∞ 1]▽>0.9√/+×.-[4 0.2 0].
 ⍘⍉⊂⊟↯△,0↯△,0.5↯△,0
 ∶Rv↙1△.
-⍜▽(|1 ⍜⍉(|1
+⍜▽(|1
+  ⍜⍉(|1
     /∘⇌
     ⊙(×∩Rv.△)
-    ⊙⊙(↯∶lam△)
+    ⊙⊙(↯∶Lam△)
     [⊙⊙∘]
-  ))<0.8,
-⍜▽(|1 ⍜⍉(|1
+  )
+)<0.8,
+⍜▽(|1
+  ⍜⍉(|1
     /∘⇌
     ⊙(+0.5×0.5Rv△)
     ↯∶×0.5Rv ↘1.△
-    ⊙⊙(↯∶met△)
+    ⊙⊙(↯∶Met△)
     [⊙⊙∘]
-  ))↧⊃(≥0.8)(<0.95),
-⍜▽(|1 ⍜⍉(|1
+  )
+)↧⊃(≥0.8)(<0.95),
+⍜▽(|1
+  ⍜⍉(|1
     /∘⇌
     ⊙(↯∶1△)
     ↯∶1.5△
-    ⊙⊙(↯∶die△)
+    ⊙⊙(↯∶Die△)
     [⊙⊙∘]
-  ))≥0.95∶
+  )
+)≥0.95∶
 ∩∩⍉/∘⇌⍉
 d ←
 mc ←
@@ -54,21 +60,21 @@ r ← ↯⧻ c 0.2
 
 d ← ⊂ d [[0 0 0] [1.5 1.5 1.5] [0 0 0] [0 0 0]]
 mc ← ⊂ mc [[0.5 0.5 0.5] [1 1 1] [0.4 0.2 0.1] [0.7 0.6 0.5]]
-mt ← ⊂ mt [lam die lam met]
+mt ← ⊂ mt [Lam Die Lam Met]
 c ← ⊂ c [[0 ¯1000 0] [0 1 0] [¯4 1 0] [4 1 0]]
 r ← ⊂ r [1000 1 1 1]
 
 Cross ← -⊙(×⊙'↻¯1↻1)×⊙'↻1↻¯1,,
 
-theta ← ÷180×πvfov
-h ← ÷⊃(○+η)○÷2theta
+Theta ← ÷180×πVFov
+h ← ÷⊃(○+η)○÷2Theta
 dr ← ×fd÷⊃(○+η)○÷2÷180×πda
 vh ← ××2 h fd
 ih ← ↥1⌊÷ar iw
 vw ← ×vh ÷ih iw
 
 w ← ÷√/+×..-la cc
-u ← ÷√/+×.. Cross vup w
+u ← ÷√/+×.. Cross Vup w
 v ← Cross w u
 
 vu ← ×u vw
@@ -76,19 +82,19 @@ vv ← ×¯v vh
 du ← ×u dr
 dv ← ×v dr
 
-pdu ← ÷iw vu
-pdv ← ÷ih vv
+Pdu ← ÷iw vu
+Pdv ← ÷ih vv
 
-ulc ← -÷2vu -÷2vv -×fd w cc
-pz ← +×0.5+pdv pdu ulc
+Ulc ← -÷2vu -÷2vv -×fd w cc
+pz ← +×0.5+Pdv Pdu Ulc
 
 Rus ← ↯⊂3∶⊂⊟⊙(×○)×○+η,,⊃(×τ[⍥⚂])(○⍘(○+η).-1×2[⍥⚂])/×.↘1
 Riud ← ↯⊂2∶⊟⊃(×○)(×○+η)⊃(×τ[⍥⚂])(√[⍥⚂])/×.↘1
 
-nan ← ÷0 0
+NaN ← ÷0 0
 NegToNaN ← +√¯<0.001.
-MashNaN ← ⍚[0 1]⊡⊙'⍉⊟¬=0×0.
-Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺'÷∶∶√/+×..
+MashNaN ← ⍚[0 1]⊡⊙'⍉⊟≠0×0.
+Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺÷√/+×..
 Refl ← -⍚[∞ 1]××2/+×,,
 Refr ← (
   # r uv n
@@ -102,60 +108,66 @@ Refr ← (
 Step ← (|4.4
   # Hit each sphere at time or nan
   # orig cdir fdir color
-  ∺'/+×,,⊙∶∺-c.
+  ∺'/+×⊙.,⊙∶⍚[¯1 ∞]-c.
   # bhalf oc cdir orig fdir color
-  ⊙(∺×⊙(./+×..)-×.r≡/+×.)
+  ⊙(∺×∶⊙(./+×..)-×.r≡/+×.)
   # bhalf ac a cdir orig fdir color
   √-∶×.,∶
   # sqrtd bhalf a cdir orig fdir color
   /↧⊟∩NegToNaN⊃(⍚[∞ 1]÷∶+)(⍚[∞ 1]÷∶-)⊙¯
   # minroots cdir orig fdir color
-  +×⧻c¬=0×0,⊙/↧≡'⊢⍏⍉. # Note: makes min NaN index overflow
+  +×⧻c≠0×0,⊙/↧≡'⊢⍏⍉. # Note: makes min NaN index overflow
   # minindex mint cdir orig fdir color
-  ⊙(.+⊙∶∺×,)
+  ⊙(.+⊙∶∺×⊙.)
   # minindex pos pos cdir fdir color
-  ⊙-∶⍘⍉⍚[0 ∞]⊡,⊂c[nan nan nan]
-  ⊙⊙∶⊙(∺'÷∶∶)∶⍚[0 ∞]⊡,⊂r nan
+  ⊙-∶⍘⍉⍚[0 ∞]⊡,⊂c[NaN NaN NaN]
+  ⊙⊙∶⊙∺÷∶⍚[0 ∞]⊡,⊂r NaN
   # minindex normal cdir pos fdir color
 
   # update color and scatter by material type
-  ∶⍘⍉⍚[0 ∞]⊡,⊂d [nan nan nan]
+  ∶⍘⍉⍚[0 ∞]⊡,⊂d [NaN NaN NaN]
   ∶⍘⍉⍚[0 ∞]⊡,⊂mc[1 1 1]
-  ⍚[0 ∞]⊡∶⊂mt nan
+  ⍚[0 ∞]⊡∶⊂mt NaN
   # mt mc d normal cdir pos fdir color
   ∶⊙(⍘⍉⊂⊂⊟)
   # mc_d_normal_cdir mt pos fdir color
 
   # TODO: Is under keep better
   # Or should I run all material functions on all spheres
-  ⍜▽(|1 ⍜⍉(|1
+  ⍜▽(|1
+    ⍜⍉(|1
       /∘⇌
-      ⊙⊙(+⊙(∺×∶)∺×∶¬,∶/↧<ⁿ¯8 10.+Rus△..)
+      ⊙⊙(+⊙∺×∺×¬,∶/↧<ⁿ¯8 10.+Rus△..)
       [⊙⊙⊙∘]
-    ))=lam,
-  ⍜▽(|1 ⍜⍉(|1
+    )
+  )=Lam,
+  ⍜▽(|1
+    ⍜⍉(|1
       /∘⇌
       # mc d norm cdir
       ⊙⊙(Refl,,)
       # mc d ref norm cdir
-      ⊙∶∺×⊙(>0/+×,∶⊙∶+×Rus△.,∶)
+      ⊙∶∺×∶⊙(>0/+×,∶⊙∶+×Rus△.,∶)
       # mc d ndir cdir
       [⊙⊙⊙∘]
-    ))=met,
-  ⍜▽(|1 ⍜⍉(|1
+    )
+  )=Met,
+  ⍜▽(|1
+    ⍜⍉(|1
       /∘⇌
       # mc d outnorm cdir
-      ⊙⊙(⊙'∺×∶.-1×2≤0/+×,,)
+      ⊙⊙(⊙∺×.-1×2≤0/+×,,)
       # mc d ff norm cdir
       ⊙(⊙⍚[∞ 1]ⁿ,¯∶)
       # mc d rr norm cdir
       ⊙⊙⊙(⍚[∞ 1]÷√/+×..,)
       # mc d rr ud norm cdir
-      ⊙⊙⊃⊃(Refl∶;)(↥⊃(>1∺×⊙(√-∶1×.))(⍚[∞ 1]>Rv↘1△.+⊙(∺×⊙(ⁿ5-∶1))∶-,1×.÷⊃+-∶1)⊙(↧1/+×¯))Refr
+      ⊙⊙⊃⊃(Refl∶;)(↥⊃(>1∺×∶⊙(√-∶1×.))(⍚[∞ 1]>Rv↘1△.+⊙(∺×∶⊙(ⁿ5-∶1))∶-,1×.÷⊃+-∶1)⊙(↧1/+×¯))Refr
       ⊙⊙(+⊙'×¬×,)
       # mc d ndir cdir
       [⊙⊙⊙∘]
-    ))=die,
+    )
+  )=Die,
   # mc_d_ndir_cdir mt pos fdir color
   ⊙⊙;⊙;/∘⇌⍉⊙;
   # mc ndir pos fdir color
@@ -165,13 +177,15 @@ Step ← (|4.4
   # pos ndir fdir color
 )
 
-StepShard ← (|1 ⍜⍘⍉(|1
+StepShard ← (|1
+  ⍜⍘⍉(|1
     /∘⇌
     ∩∩⍉
     Step
     ∩∩⍉
     [⊙⊙⊙∘]
-  ))
+  )
+)
 
 R ← (
   # Look into re-enabling this and other keeps when perf improved
@@ -181,7 +195,7 @@ R ← (
     ⍜▽(|1
       # TODO: look into a better way to shard/ other memory reduction ideas.
       ⊂∶↘1△,⊂∶⌈÷,∶⌈÷ss.⧻.
-      ∶⊙⬚nan↯⧻,
+      ∶⊙⬚NaN↯⧻,
       ≡StepShard
       ↙∶/⊂
     )
@@ -195,12 +209,12 @@ R ← (
 )
 
 # run sampling
-⍉↯[¯1 3]↯⊂sm△.⊠+∺×⇡ih pdv ∺×⇡iw pdu
-+∺×pdu-0.5Rv [⊢⇌]△.
-+∺×pdv-0.5Rv [⊢⇌]△.
+⍉↯[¯1 3]↯⊂sm△.⊠+∺×∶⇡ih Pdv ∺×∶⇡iw Pdu
++∺×∶Pdu-0.5Rv [⊢⇌]△.
++∺×∶Pdv-0.5Rv [⊢⇌]△.
 +pz
 ⍘⍉↯∶cc↻1△.
-⊙-.+ ×>0da /+≡∺×[du dv]Riud△.
+⊙-.+ ×>0da /+≡∺×∶[du dv]Riud△.
 ⊙.⊙(∶↯∶1△.)
 
 ∩∩⍉
@@ -208,8 +222,8 @@ R ← (
 ⌈÷tc ⧻.
 ts ←
 ?R(|1
-  ;⍥(↘ts∶↰R↙↧ts⧻..)tc
-  ⍥(⊂↲∶)-1tc↲
+  ;⍥(↘ts∶spawnR↙↧ts⧻..)tc
+  ⍥(⊂wait∶)-1tc wait
 ) ≤1tc
 &p ""
 
