@@ -20,7 +20,7 @@ Dielectric ← 2
 Center ← [[0 ¯1000 0] [0 1 0] [¯4 1 0] [4 1 0]]
 Radius ← [1000 1 1 1]
 Color ← [[0.5 0.5 0.5] [1 1 1] [0.4 0.2 0.1] [0.7 0.6 0.5]]
-Material ← [Lambertian Lambertian Lambertian Metal]
+Material ← [Lambertian Dielectric Lambertian Metal]
 ExtraData ← [0 1.5 0 0]
 
 Cross ← -⊙(×⊙'↻¯1↻1)×⊙'↻1↻¯1,,
@@ -60,7 +60,7 @@ Refr ← (
   # r uv n
   ⊙(↧1/+×¯,,)
   # r ct uv n
-  ×⊙(+∺×⊙,)
+  ∺×⊙(+∺×⊙,)
   # perp n
   +∺×¯√⌵-∶1/+×.,∶
 )
@@ -98,6 +98,26 @@ MetalScatter ← (|5.2
   ∩∺×,∶=Metal
 )
 
+DielectricScatter ← (|5.2
+  ⊙(
+    # mc d outnorm cdir
+    ⊙⊙(⊙∺×.-1×2≤0/+×,,)
+    # mc d ff norm cdir
+    ⊙(ⁿ¯∶)
+    # mc rr norm cdir
+    ⊙⊙(⍚[∞ 1]÷√/+×..∶)
+    # mc rr ud norm
+    # ⊙(↯⊂3△.)
+    ⊙⊃⊃(Refl∶;)(↥⊃(>1×∶⊙(√-∶1×.))(>Rv↘1△.+⊙(×∶⊙(ⁿ5-∶1))∶-,1×.÷⊃+-∶1)⊙(↧1/+×¯))Refr
+    # Cleanup NaNs in Refr.
+    # TODO: Look at rewriting this function or nicer ways to do this.
+    ⊙⊙⊙(↯⊙(⍜▽(↯∶0△)∩♭)△.≠0×0.)
+    ⊙(+⊙'∺×¬∺×,)
+    # mc ndir
+  )
+  ∩∺×,∶=Dielectric
+)
+
 StepRays ← (|3.4
   # Origin Direction I
   Center ⊙∶∶Radius,,
@@ -112,10 +132,11 @@ StepRays ← (|3.4
   ∶⊏,ExtraData
   ∶⍉⊏,Color
   ⊏∶Material
+
   # TODO: Should these use under keep to avoid extra work of applying to non-matching rays.
-  ⊃LambertianScatter MetalScatter
-  ⊙∶
-  ∩+
+  ⊃⊃LambertianScatter MetalScatter DielectricScatter
+  ∩+⊙∶
+  ∩+⊙∶
   ⊙∶
 )
 
