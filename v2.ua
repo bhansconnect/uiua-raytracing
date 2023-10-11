@@ -1,5 +1,5 @@
-# ThreadCount ← -1NumProcs
-ThreadCount ← 1
+ThreadCount ← -1NumProcs
+# ThreadCount ← 1
 
 ImageWidth ← 200
 MaxDepth ← 50
@@ -103,7 +103,7 @@ Refr ← (
   +∺×¯√⌵-∶1/+×.,∶
 )
 
-PixelCenters ← ⍉↯[¯1 3]⊠+∺×PixelDeltaV ⇡ImageHeight ∺×PixelDeltaU ⇡ImageWidth
+PixelCenters ← ↯[¯1 3]⊠+∺×PixelDeltaV ⇡ImageHeight ∺×PixelDeltaU ⇡ImageWidth
 
 HitTimes ← (|4
   # Center Origin Direction Radius
@@ -178,8 +178,7 @@ StepRays ← (|3.4
   ⊙∶
 )
 
-Sample ← (
-  PixelCenters
+SampleRaysOnce ← (
   +∺×∶PixelDeltaU-0.5Rv [⊢⇌]△.
   +∺×∶PixelDeltaV-0.5Rv [⊢⇌]△.
   +PixelZero
@@ -207,23 +206,21 @@ Sample ← (
   &pf "█"
 )
 
-SampleN ← (|1
-  ↯/[3 ×ImageHeight ImageWidth] 0
-  ⍥(+Sample)∶
+SampleRays ← (|1
+  ↯∶0△.
+  ⍥(+SampleRaysOnce ,)Samples
+  ⊙;
 )
 
-ThreadSize ← ⌈÷ThreadCount Samples
-
-≠Samples×ThreadCount ThreadSize
-?(|0.0 &p $"Increasing sample size from _ to _ to evenly utilize threads"Samples ×ThreadCount ThreadSize)(|0.0 ;0)
 ≤1ThreadCount
-?(|0 SampleN Samples)(|0
-  ⍥(spawn(SampleN ThreadSize))ThreadCount
-  ⍥(+wait∶)-1ThreadCount wait
+?(|0 SampleRays ⍉PixelCenters)(|0
+  -1\+∊⇡⧻PixelCenters⁅×⇡ThreadCount⌈÷ThreadCount ⧻PixelCenters
+  ⊕(spawnSampleRays ⍉)∶PixelCenters
+  ∧(⊂ ⊙'⍉wait) ↯[0 3][]
 )
-÷×ThreadCount ThreadSize
+÷Samples
 
 &p ""
-√↯[ImageHeight ImageWidth 3]⍉
+√↯[ImageHeight ImageWidth 3]
 
 &ims
