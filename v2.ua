@@ -113,7 +113,8 @@ HitTimes ← (|4
   # bhalf ac a
   ⊙(-∶×.).
   # bhalf disc a
-  /↧NegToNaN⊟⊃(÷∶+)(÷∶-)√∶¯
+  ⊃(÷∶+)(÷∶-)√∶¯
+  ↧∩NegToNaN
 )
 
 LambertianScatter ← (|5.2
