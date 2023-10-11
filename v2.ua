@@ -213,7 +213,7 @@ SampleRays ← (|1
 )
 
 ≤1ThreadCount
-?(|0 SampleRays ⍉PixelCenters)(|0
+?(|0 ⍜⍉SampleRays PixelCenters)(|0
   -1\+∊⇡⧻PixelCenters⁅×⇡ThreadCount⌈÷ThreadCount ⧻PixelCenters
   ⊕(spawnSampleRays ⍉)∶PixelCenters
   ∧(⊂ ⊙'⍉wait) ↯[0 3][]
