@@ -147,7 +147,7 @@ DielectricScatter ← (|5.2
     ⊙⊙(⍚[∞ 1]÷√/+×..∶)
     # mc rr ud norm
     # ⊙(↯⊂3△.)
-    ⊙⊃⊃(Refl∶;)(↥⊃(>1×∶⊙(√-∶1×.))(>Rv↘1△.+⊙(×∶⊙(ⁿ5-∶1))∶-,1×.÷⊃+-∶1)⊙(↧1/+×¯))Refr
+    ⊙⊃⊃(Refl∶;)(↥⊃(>1×∶⊙(√-∶1×.))(>Rv△.+⊙(×∶⊙(ⁿ5-∶1))∶-,1×.÷⊃+-∶1)⊙(↧1/+×¯))Refr
     # Cleanup NaNs in Refr.
     # TODO: Look at rewriting this function or nicer ways to do this.
     ⊙⊙⊙(↯⊙(⍜▽(↯∶0△)∩♭)△.≠0×0.)
