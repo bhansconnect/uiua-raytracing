@@ -192,7 +192,6 @@ SampleRaysOnce ← (
     # col ori dir I oldcol olddir
     # Merge
     # This is a mess, but it just does some under select based merging after shuffling the stack.
-    # It is also the core slowness of the entire code.
     ⊙⊙⊙(,∶)
     ⊙⊙∶⊙∶∶
     ⊙⊙⊙(⍜⊏(×⊙⍉)⊙∶∶⊙,)
