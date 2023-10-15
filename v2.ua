@@ -212,11 +212,17 @@ SampleRays ← (|1
   ⊙;
 )
 
+LoadAndSample ← (|1
+  =↯[⧻PixelCenters]⇡ThreadCount
+  ▽∶PixelCenters
+  ⍜⍉SampleRays
+)
+
 ≤1ThreadCount
 ?(|0 ⍜⍉SampleRays PixelCenters)(|0
-  -1\+∊⇡⧻PixelCenters⁅×⇡ThreadCount⌈÷ThreadCount ⧻PixelCenters
-  ⊕(spawnSampleRays ⍉)∶PixelCenters
-  ∧(⊂ ⊙'⍉wait) ↯[0 3][]
+  ∵spawnLoadAndSample⇡ThreadCount
+  ∧(⊂⊙wait) ↯[0 3][]
+  ⊏⍏⍏ ↯[⧻PixelCenters]⇡ThreadCount
 )
 ÷Samples
 
