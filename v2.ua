@@ -228,7 +228,7 @@ LoadAndSample ← (|1
 
 ≤1ThreadCount
 ?(|0 ⍜⍉SampleRays PixelCenters)(|0
-  ∵spawnLoadAndSample⇡ThreadCount
+  ∵spawn LoadAndSample⇡ThreadCount
   ∧(⊂⊙wait) ↯[0 3][]
   ⊏⍏⍏ ↯[⧻PixelCenters]⇡ThreadCount
 )
