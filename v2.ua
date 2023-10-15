@@ -161,7 +161,7 @@ StepRays ← (|3.4
   # Origin Direction I
   Center ⊙∶∶Radius,,
   ⍚[¯1 ∞ ∞ ¯1]HitTimes
-  =0×0,⊙/↧≡'⊢⍏⍉.
+  =0×0,≡⊗,⊃⍉/↧
   # Remove NaN rays from rest of computation
   ⊙⊙⊙⊙▽⊙⊙⊙(∺▽,∶)⊙⊙(∺▽,∶)⊙(▽,∶)▽,∶
   ⊙(⊙∶.+⊙∶∺×⊙.⊙∶)
@@ -179,7 +179,7 @@ StepRays ← (|3.4
   ⊙∶
 )
 
-SampleRaysOnce ← (
+SampleRaysOnce ← (|1
   +∺×∶PixelDeltaU-0.5Rv [⊢⇌]△.
   +∺×∶PixelDeltaV-0.5Rv [⊢⇌]△.
   +PixelZero
