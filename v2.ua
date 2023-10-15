@@ -104,7 +104,7 @@ Refr ← (
 
 PixelCenters ← ↯[¯1 3]⊠+∺×PixelDeltaV ⇡ImageHeight ∺×PixelDeltaU ⇡ImageWidth
 
-NegToNaN ← ⍜(-0.001)⍜√∘
+NegToNaN ← ⍜(-0.001)(×.√)
 HitTimes ← (|4
   # Center Origin Direction Radius
   ⊙⊙(∶/+×.)/+×,,-
