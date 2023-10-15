@@ -91,7 +91,6 @@ Riud ← ↯⊂2∶⊟⊃(×○)(×○+η)⊃(×τ[⍥⚂])(√[⍥⚂])/×.↘1
 NaN ← ÷0 0
 
 # TODO: Re-evaluate and clean rewrite maybe
-NegToNaN ← +√¯<0.001.
 Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺÷√/+×..
 Refl ← -⍚[∞ 1]××2/+×,,
 Refr ← (
@@ -105,6 +104,7 @@ Refr ← (
 
 PixelCenters ← ↯[¯1 3]⊠+∺×PixelDeltaV ⇡ImageHeight ∺×PixelDeltaU ⇡ImageWidth
 
+NegToNaN ← ⍜(-0.001)⍜√∘
 HitTimes ← (|4
   # Center Origin Direction Radius
   ⊙⊙(∶/+×.)/+×,,-
