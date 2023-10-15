@@ -159,9 +159,17 @@ DielectricScatter ← (|5.2
 
 StepRays ← (|3.4
   # Origin Direction I
-  Center ⊙∶∶Radius,,
-  ⍚[¯1 ∞ ∞ ¯1]HitTimes
-  =0×0,≡⊗,⊃⍉/↧
+  Center Radius
+  0 ⊃(↯∶NaN)(↯∶0)⊡1△⊃(⋅⋅∘)(⊙⊙∘)
+  # Index MinTime MinIndex Center Radius Origin Direction I
+  ⍥(
+    ⊃⊃⊃(⊡⊙⋅⋅⊙⋅⋅;)(⋅⋅⋅⋅⋅⊙∘)(⊡⊙⋅⋅⋅⊙⋅;)(⊙⊙⊙⊙⊙⊙∘)
+    HitTimes
+    >,∶⊙,
+    ⊃⊃(+1⋅⋅⊙⋅;)(↧⋅⊙⋅⊙;)(+⊙'×¬×,∶⊙⋅⊙⋅∘)
+  )⧻Radius
+  =0×0,⊙⊙⋅;∶;
+
   # Remove NaN rays from rest of computation
   ⊙⊙⊙⊙▽⊙⊙⊙(∺▽,∶)⊙⊙(∺▽,∶)⊙(▽,∶)▽,∶
   ⊙(⊙∶.+⊙∶∺×⊙.⊙∶)
