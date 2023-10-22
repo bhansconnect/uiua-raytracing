@@ -19,7 +19,7 @@ Dielectric ← 2
 
 Rv ← ↯∶[⍥⚂]/×.
 +×[0.9 0 0.9]Rv△.⍉↯[¯1 3]⊠(⊂⊂∶0.2).-11⇡22
-⍚[∞ 1]▽>0.9√/+×.-[4 0.2 0].
+≑[∞ 1]▽>0.9√/+×.-[4 0.2 0].
 ⍘⍉⊂⊟↯△,0↯△,0.5↯△,0
 ∶Rv↙1△.
 ⍜▽(|1 
@@ -91,8 +91,8 @@ Riud ← ↯⊂2∶⊟⊃(×○)(×○+η)⊃(×τ[⍥⚂])(√[⍥⚂])/×.↘1
 NaN ← ÷0 0
 
 # TODO: Re-evaluate and clean rewrite maybe
-Bgd ← +⍚[0 ∞]×[1 1 1]-∶1∶⍚[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺÷√/+×..
-Refl ← -⍚[∞ 1]××2/+×,,
+Bgd ← +≑[0 ∞]×[1 1 1]-∶1∶≑[0 ∞]×[0.5 0.7 1].×0.5+1⊡1∺÷√/+×..
+Refl ← -≑[∞ 1]××2/+×,,
 Refr ← (
   # r uv n
   ⊙(↧1/+×¯,,)
@@ -144,7 +144,7 @@ DielectricScatter ← (|5.2
     # mc d ff norm cdir
     ⊙(ⁿ¯∶)
     # mc rr norm cdir
-    ⊙⊙(⍚[∞ 1]÷√/+×..∶)
+    ⊙⊙(≑[∞ 1]÷√/+×..∶)
     # mc rr ud norm
     # ⊙(↯⊂3△.)
     ⊙⊃⊃(Refl∶;)(↥⊃(>1×∶⊙(√-∶1×.))(>Rv△.+⊙(×∶⊙(ⁿ5-∶1))∶-,1×.÷⊃+-∶1)⊙(↧1/+×¯))Refr
@@ -229,7 +229,7 @@ LoadAndSample ← (|1
 ≤1ThreadCount
 ?(|0 ⍜⍉SampleRays PixelCenters)(|0
   ∵spawn LoadAndSample⇡ThreadCount
-  ∧(⊂⊙wait) ↯[0 3][]
+  ∧⋄~(⊂⊙wait) ↯[0 3][]
   ⊏⍏⍏ ↯[⧻PixelCenters]⇡ThreadCount
 )
 ÷Samples
