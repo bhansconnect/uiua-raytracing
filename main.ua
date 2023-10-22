@@ -131,8 +131,8 @@ MetalScatter ← (|5.2
   ⊙(
     ⊙⊙(Refl,∶)
     # mc d ref norm
-    ⊙(>0/+×,∶+∺×∶Rus⊂3△.)
-    ∺×∶
+    ⊙(>0/+×,∶+≐×Rus⊂3△.)
+    ≐×
   )
   ∩∺×,∶=Metal
 )
@@ -188,11 +188,11 @@ StepRays ← (|3.4
 )
 
 SampleRaysOnce ← (|1
-  +∺×∶PixelDeltaU-0.5Rv [⊢⇌]△.
-  +∺×∶PixelDeltaV-0.5Rv [⊢⇌]△.
+  +≐×PixelDeltaU-0.5Rv [⊢⇌]△.
+  +≐×PixelDeltaV-0.5Rv [⊢⇌]△.
   +PixelZero
   ⍘⍉↯∶CameraCenter↻1△.
-  ⊙-.+ ×>0DefocusAngle /+≡∺×∶[DefocusDiskU DefocusDiskV]Riud△.
+  ⊙-.+ ×>0DefocusAngle /+≡≐×[DefocusDiskU DefocusDiskV]Riud△.
   ⊙(⊙(⇡⊡1△.↯∶1△.).)
   ⊙⊙(⊙∩⍉⍉)
   ⍥(
